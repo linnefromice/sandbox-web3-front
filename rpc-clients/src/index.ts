@@ -34,6 +34,7 @@ const main = async () => {
   const abiStringName = "name()";
   const abiStringSymbol = "symbol()";
   const abiStringDecimals = "decimals()";
+  const abiStringTotalSupply = "totalSupply()";
 
   const endpoint = "https://summer-convincing-sponge.matic.discover.quiknode.pro/f0b8d2ced97c06ed1f312a176a8123a9ef87a6f2/"
   // const to = "0x0000000000000000000000000000000000001010" // MATIC
@@ -69,6 +70,15 @@ const main = async () => {
   })
   console.log(resDecimals.data.result)
   console.log(parseInt(resDecimals.data.result, 16))
+
+  console.log("> totalSupply()")
+  const resTotalSupply = await callEth_call({
+    endpoint,
+    to,
+    data: generateDataFromWeb3(abiStringTotalSupply)
+  })
+  console.log(resTotalSupply.data.result)
+  console.log(BigInt(resTotalSupply.data.result))
 }
 
 main()
