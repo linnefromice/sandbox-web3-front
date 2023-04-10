@@ -1,17 +1,17 @@
-const mainRsa = async () => {
-  let crypto = await import('node:crypto');
+const mainEcdsa = async () => {
+  const crypto = await import('node:crypto');
 
-  const { privateKey, publicKey } = crypto.generateKeyPairSync('rsa', {
-    modulusLength: 2048,
-  });
+  const { privateKey, publicKey } = crypto.generateKeyPairSync("ec", {
+    namedCurve: 'secp256k1'
+  })
   console.log("> privateKey")
   console.log(privateKey.export({
-    type: 'pkcs1',
+    type: 'pkcs8',
     format: "pem"
   }))
   console.log("> publicKey")
   console.log(publicKey.export({
-    type: 'pkcs1',
+    type: 'spki',
     format: "pem"
   }))
 
@@ -28,6 +28,6 @@ const mainRsa = async () => {
   console.log('Verification:', verify);
 }
 
-mainRsa()
+mainEcdsa()
   .then(_ => console.log("Finished!!"))
   .catch(_ => console.log("Error!!"))
