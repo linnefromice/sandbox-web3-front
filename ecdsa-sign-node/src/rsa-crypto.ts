@@ -1,4 +1,4 @@
-const main = async () => {
+const mainRsa = async () => {
   let crypto = await import('node:crypto');
 
   const { privateKey, publicKey } = crypto.generateKeyPairSync('rsa', {
@@ -31,6 +31,6 @@ const main = async () => {
   console.log('Verification:', verify);
 }
 
-main()
+mainRsa()
   .then(_ => console.log("Finished!!"))
   .catch(_ => console.log("Error!!"))
