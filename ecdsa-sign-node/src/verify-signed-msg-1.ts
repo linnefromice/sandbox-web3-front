@@ -1,24 +1,40 @@
 import * as EthUtil from "ethereumjs-util"
 
-const mainVerifySignedMsg01 = async () => {
-  const SIGNER_ADDRESS_STRING = '0x89c24a88bad4abe0a4f5b2eb5a86db1fb323832c'
-  const MSG = "piyopiyo!"
-  const msgHex = Buffer.from(MSG, 'utf8').toString('hex')
-  const msgHash = EthUtil.keccakFromHexString(`0x${msgHex}`)
-  console.log(EthUtil.bufferToHex(msgHash))
+const str_to_hash = (msg: String): Buffer => {
+  const msgHexStr = Buffer.from(msg, 'utf8').toString('hex')
+  return EthUtil.keccakFromHexString(`0x${msgHexStr}`) // use keccak256 hash
+}
 
-  const SIGNED_MSG = {
-    r : '0xdd7fa0d0b259468434cf14760c6607f36f2d7429feaaaedf6d86265c11098d20',
-    s : '0x14cf83d2204e50b12fcb2445a70c214509d0f4edf0e0ee6e8d18fed8fbb146c0',
-    v : 27
-  }
+const sign = (privateKey: Buffer, msg: String): EthUtil.ECDSASignature => {
+  const msgHash = str_to_hash(msg)
+  return EthUtil.ecsign(msgHash, privateKey)
+}
 
+const recover = (msg: String, signature: EthUtil.ECDSASignature): Buffer => {
+  const msgHash = str_to_hash(msg)
   const publicKey = EthUtil.ecrecover(
     msgHash, 
-    SIGNED_MSG.v, 
-    EthUtil.toBuffer(SIGNED_MSG.r), 
-    EthUtil.toBuffer(SIGNED_MSG.s)
+    signature.v, 
+    EthUtil.toBuffer(signature.r), 
+    EthUtil.toBuffer(signature.s)
   )
+  return publicKey
+}
+
+const mainVerifySignedMsg01 = async () => {
+  const PRIVATE_KEY_STRING = '0x61ce8b95ca5fd6f55cd97ac60817777bdf64f1670e903758ce53efc32c3dffeb'
+  const SIGNER_ADDRESS_STRING = '0x89c24a88bad4abe0a4f5b2eb5a86db1fb323832c'
+  const MSG = "piyopiyo!"
+
+  const privateKey = EthUtil.toBuffer(PRIVATE_KEY_STRING)
+  
+  const signature = sign(privateKey, MSG)
+  console.log("> signature")
+  console.log(signature)
+  const publicKey = recover(MSG, signature)
+  console.log("> publicKey")
+  console.log(EthUtil.bufferToHex(publicKey))
+
   const address = EthUtil.pubToAddress(publicKey)
 
   if (EthUtil.bufferToHex(address) == SIGNER_ADDRESS_STRING) console.log("Success recover address")
