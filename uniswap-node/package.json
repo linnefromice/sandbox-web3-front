@@ -10,7 +10,7 @@
   "license": "Apache-2.0",
   "keywords": [],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "ts-jest",
     "lint": "gts lint",
     "clean": "gts clean",
     "compile": "tsc",
@@ -19,10 +19,14 @@
     "generate-ts-client": "typechain --target=ethers-v5 --out-dir=src/types/typechain ./resources/abi/*.json"
   },
   "devDependencies": {
+    "@jest/globals": "^29.5.0",
     "@typechain/ethers-v5": "^10.2.0",
+    "@types/jest": "^29.5.1",
     "@types/node": "^18.15.11",
     "ethers": "5.7.2",
     "gts": "^3.1.1",
+    "jest": "^29.5.0",
+    "ts-jest": "^29.1.0",
     "ts-node": "^10.9.1",
     "typechain": "^8.1.1",
     "typescript": "~4.7.0"
