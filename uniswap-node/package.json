@@ -15,13 +15,16 @@
     "clean": "gts clean",
     "compile": "tsc",
     "fix": "gts fix",
-    "ts-node": "ts-node"
+    "ts-node": "ts-node",
+    "generate-ts-client": "typechain --target=ethers-v5 --out-dir=src/types/typechain ./resources/abi/*.json"
   },
   "devDependencies": {
+    "@typechain/ethers-v5": "^10.2.0",
     "@types/node": "^18.15.11",
-    "ethers": "^6.3.0",
+    "ethers": "5.7.2",
     "gts": "^3.1.1",
     "ts-node": "^10.9.1",
+    "typechain": "^8.1.1",
     "typescript": "~4.7.0"
   }
 }
