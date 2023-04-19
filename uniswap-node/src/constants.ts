@@ -23,7 +23,7 @@ export const MULTICALL_ADDRS: ChainsInfoType<AddressType | null> = {
   ethereum: MULTICALL2_ADDR,
   polygon: '0xa1B2b503959aedD81512C37e9dce48164ec6a94d',
   optimism: null,
-  arbitrum: null,
+  arbitrum: '0x842eC2c7D803033Edf55E478F461FC547Bc54EB2',
   bnb: null,
 };
 export const ETHEREUM_TOKENS: TokenInfoType<AddressType | null> = {
@@ -43,4 +43,22 @@ export const POLYGON_TOKENS: TokenInfoType<AddressType | null> = {
   dai: '0x8f3cf7ad23cd3cadbd9735aff958023239c6a063', // PoS?
   matic: '0x0d500b1d8e8ef31e21c99d1db9a6444d3adf1270',
   link: '0x53e0bca35ec356bd5dddfebbd1fc0fd03fabad39',
+};
+export const OPTIMISM_TOKENS: TokenInfoType<AddressType | null> = {
+  weth: '0x4200000000000000000000000000000000000006',
+  wbtc: '0x68f180fcce6836688e9084f035309e29bf0a2095',
+  usdc: '0x7f5c764cbc14f9669b88837ca1490cca17c31607',
+  usdt: '0x94b008aa00579c1307b0ef2c499ad98a8ce58e58',
+  dai: '0xda10009cbd5d07dd0cecc66161fc93d7c9000da1',
+  matic: null,
+  link: '0x350a791bfc2c21f9ed5d10980dad2e2638ffa7f6',
+};
+export const ARBITRUM_TOKENS: TokenInfoType<AddressType | null> = {
+  weth: '0x82af49447d8a07e3bd95bd0d56f35241523fbab1',
+  wbtc: '0x2f2a2543b76a4166549f7aab2e75bef0aefc5b0f',
+  usdc: '0xff970a61a04b1ca14834a43f5de4533ebddb5cc8',
+  usdt: '0xfd086bc7cd5c481dcc9c85ebe478a1c0b69fcbb9',
+  dai: '0xda10009cbd5d07dd0cecc66161fc93d7c9000da1',
+  matic: null,
+  link: '0xf97f4df75117a78c1a5a0dbb814af92458539fb4',
 };
