@@ -6,9 +6,12 @@ import {
   OPTIMISM_TOKENS,
   POLYGON_TOKENS,
 } from '../src/constants';
+import {envs} from '../src/environments';
 import {AddressType, TokenInfoType} from '../src/types';
 import {ERC20__factory, Multicall2__factory} from '../src/types/typechain';
 import {TokenMetadataType, getTokenMetadatas} from '../src/utils/contracts';
+
+const {providerUrl} = envs;
 
 const tokenMetadatas = async (
   url: string,
@@ -34,7 +37,7 @@ describe('Tokens', () => {
   describe("should get tokens' metadatas", () => {
     it('Ethereum', async () => {
       const metadatas = await tokenMetadatas(
-        'https://eth-mainnet.alchemyapi.io/v2/JVUDgQSB0r-3HhohPCod6uBy_Zx8WEdy',
+        providerUrl.ethereum,
         MULTICALL_ADDRS.ethereum || '',
         ETHEREUM_TOKENS
       );
@@ -50,7 +53,7 @@ describe('Tokens', () => {
     });
     it('Polygon', async () => {
       const metadatas = await tokenMetadatas(
-        'https://polygon-mainnet.g.alchemy.com/v2/sLp6VfuskMEwx8Wx0DvaRkI8qCoVYF8f',
+        providerUrl.polygon,
         MULTICALL_ADDRS.polygon || '',
         POLYGON_TOKENS
       );
@@ -68,7 +71,7 @@ describe('Tokens', () => {
       'Optimism',
       async () => {
         const provider = new ethers.providers.JsonRpcProvider(
-          'https://opt-mainnet.g.alchemy.com/v2/Ezm0tB8-gpM3neOBuqw8pUlw5UA-MwFF'
+          providerUrl.optimism
         );
 
         const _getMetadata = async (_token: AddressType) => {
@@ -113,7 +116,7 @@ describe('Tokens', () => {
     );
     it('Arbitrum', async () => {
       const metadatas = await tokenMetadatas(
-        'https://arb1.arbitrum.io/rpc	',
+        providerUrl.arbitrum,
         MULTICALL_ADDRS.arbitrum || '',
         ARBITRUM_TOKENS
       );
