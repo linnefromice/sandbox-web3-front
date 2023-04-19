@@ -1,4 +1,9 @@
-import {AddressType, ChainsInfoType, TokenInfoType} from './types';
+import {
+  AddressType,
+  ChainsInfoType,
+  PoolInfoType,
+  TokenInfoType,
+} from './types';
 
 export const CHAINS = [
   'ethereum',
@@ -15,6 +20,12 @@ export const TOKEN_SYMBOLS = [
   'dai',
   'matic',
   'link',
+] as const;
+export const POOL_SYMBOLS = [
+  'usdc_eth_005',
+  'dai_usdc_001',
+  'matic_eth_030',
+  'link_eth_030',
 ] as const;
 
 const MULTICALL2_ADDR: AddressType =
@@ -61,4 +72,26 @@ export const ARBITRUM_TOKENS: TokenInfoType<AddressType | null> = {
   dai: '0xda10009cbd5d07dd0cecc66161fc93d7c9000da1',
   matic: null,
   link: '0xf97f4df75117a78c1a5a0dbb814af92458539fb4',
+};
+
+const V3FACTORY_ADDR: AddressType =
+  '0x1f98431c8ad98523631ae4a59f267346ea31f984';
+export const V3FACTORY_ADDRS: ChainsInfoType<AddressType | null> = {
+  ethereum: V3FACTORY_ADDR,
+  polygon: V3FACTORY_ADDR,
+  optimism: V3FACTORY_ADDR,
+  arbitrum: V3FACTORY_ADDR,
+  bnb: null,
+};
+export const ETHEREUM_POOLS: PoolInfoType<AddressType | null> = {
+  usdc_eth_005: '0x88e6a0c2ddd26feeb64f039a2c41296fcb3f5640',
+  dai_usdc_001: '0x5777d92f208679db4b9778590fa3cab3ac9e2168',
+  matic_eth_030: '0x290a6a7460b308ee3f19023d2d00de604bcf5b42',
+  link_eth_030: '0xa6cc3c2531fdaa6ae1a3ca84c2855806728693e8',
+};
+export const POLYGON_POOLS: PoolInfoType<AddressType | null> = {
+  usdc_eth_005: '0x45dda9cb7c25131df268515131f647d726f50608',
+  dai_usdc_001: '0x5645dcb64c059aa11212707fbf4e7f984440a8cf',
+  matic_eth_030: '0x167384319b41f7094e62f7506409eb38079abff8',
+  link_eth_030: '0x3e31ab7f37c048fc6574189135d108df80f0ea26',
 };
