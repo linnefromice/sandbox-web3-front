@@ -17,11 +17,11 @@ export const TOKEN_SYMBOLS = [
   'link',
 ] as const;
 
-const MULTICALL_ADDR: AddressType =
+const MULTICALL2_ADDR: AddressType =
   '0x5BA1e12693Dc8F9c48aAD8770482f4739bEeD696';
 export const MULTICALL_ADDRS: ChainsInfoType<AddressType | null> = {
-  ethereum: MULTICALL_ADDR,
-  polygon: MULTICALL_ADDR,
+  ethereum: MULTICALL2_ADDR,
+  polygon: '0xa1B2b503959aedD81512C37e9dce48164ec6a94d',
   optimism: null,
   arbitrum: null,
   bnb: null,
