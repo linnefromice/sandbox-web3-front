@@ -1,6 +1,6 @@
 import { AbiCoder, keccak256 } from "ethers"
 const axios = require('axios')
-const Web3 = require('web3');
+// const Web3 = require('web3');
 
 // const generateDataFromEthers = (signature: string) => {
 //   const abiCoder = new AbiCoder();
