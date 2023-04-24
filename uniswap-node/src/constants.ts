@@ -21,6 +21,8 @@ export const TOKEN_SYMBOLS = [
   'matic',
   'link',
 ] as const;
+
+// token0, token1, fee
 export const POOL_SYMBOLS = [
   'usdc_eth_005',
   'dai_usdc_001',
@@ -36,6 +38,15 @@ export const MULTICALL_ADDRS: ChainsInfoType<AddressType | null> = {
   optimism: null,
   arbitrum: '0x842eC2c7D803033Edf55E478F461FC547Bc54EB2',
   bnb: null,
+};
+export const TOKEN_DECIMALS: TokenInfoType<number> = {
+  weth: 18,
+  wbtc: 8,
+  usdc: 6,
+  usdt: 6,
+  dai: 18,
+  matic: 18,
+  link: 18,
 };
 export const ETHEREUM_TOKENS: TokenInfoType<AddressType | null> = {
   weth: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
