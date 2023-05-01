@@ -5,7 +5,10 @@ import {UniswapV3Pool, UniswapV3Pool__factory} from './types/typechain';
 
 const {providerUrl} = envs;
 
-const getObservations = async (
+export const pow10 = (n: ethers.BigNumberish) =>
+  ethers.BigNumber.from(10).pow(n);
+
+export const getObservations = async (
   pool: UniswapV3Pool,
   observationIndex: number,
   blockTag?: ethers.providers.BlockTag
@@ -21,7 +24,7 @@ const getObservations = async (
   return observation;
 };
 
-const getSlot0 = async (
+export const getSlot0 = async (
   pool: UniswapV3Pool,
   blockTag?: ethers.providers.BlockTag
 ) => {
@@ -56,8 +59,6 @@ const calculatePrice = async ({
     .div(ethers.BigNumber.from(2).pow(192));
   return price;
 };
-
-const pow10 = (n: ethers.BigNumberish) => ethers.BigNumber.from(10).pow(n);
 
 const main = async () => {
   const provider = new ethers.providers.JsonRpcProvider(providerUrl.ethereum);
@@ -190,71 +191,6 @@ const main = async () => {
   );
 };
 
-const mainGetPastExchangeRate = async () => {
-  const provider = new ethers.providers.JsonRpcProvider(providerUrl.ethereum);
-  const decs = TOKEN_DECIMALS;
-  const pool = UniswapV3Pool__factory.connect(
-    ETHEREUM_POOLS.usdc_eth_005 || '',
-    provider
-  );
-
-  const calculatePriceBySqrtPriceX96 = ({
-    sqrtPriceX96,
-    precision,
-  }: {
-    sqrtPriceX96: ethers.BigNumber;
-    precision: number;
-  }) => {
-    const price = sqrtPriceX96
-      .mul(sqrtPriceX96)
-      .mul(ethers.BigNumber.from(10).pow(precision))
-      .div(ethers.BigNumber.from(2).pow(192));
-    return price;
-  };
-
-  const getPastExchangeRate = ({
-    sqrtPriceX96,
-    precision,
-  }: {
-    sqrtPriceX96: ethers.BigNumber;
-    precision: number;
-  }) => {
-    return calculatePriceBySqrtPriceX96({
-      sqrtPriceX96,
-      precision,
-    })
-      .mul(pow10(decs.usdc))
-      .div(pow10(decs.weth))
-      .toString();
-  };
-
-  const logPastExchangeRate = async (yyyymmdd: number, blockTag: number) => {
-    const slot0 = await getSlot0(pool, blockTag);
-    const observation = await getObservations(
-      pool,
-      slot0.observationIndex,
-      blockTag
-    );
-    console.log(
-      `${yyyymmdd}: ${new Date(
-        observation.blockTimestamp * 1000
-      ).toISOString()}`
-    );
-    console.log(
-      getPastExchangeRate({
-        sqrtPriceX96: slot0.sqrtPriceX96,
-        precision: 18,
-      })
-    );
-  };
-
-  await logPastExchangeRate(20220101, 13916166);
-  await logPastExchangeRate(20230101, 16308190);
-  await logPastExchangeRate(20230201, 16530248);
-  await logPastExchangeRate(20230301, 16730072);
-  await logPastExchangeRate(20230401, 16950603);
-};
-
-mainGetPastExchangeRate()
+main()
   .then(_ => console.log('Success!!'))
   .catch(_ => console.error('Failure!!'));
