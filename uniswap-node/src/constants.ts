@@ -106,3 +106,15 @@ export const POLYGON_POOLS: PoolInfoType<AddressType | null> = {
   matic_eth_030: '0x167384319b41f7094e62f7506409eb38079abff8',
   link_eth_030: '0x3e31ab7f37c048fc6574189135d108df80f0ea26',
 };
+export const OPTIMISM_POOLS: PoolInfoType<AddressType | null> = {
+  usdc_eth_005: '0x85149247691df622eaf1a8bd0cafd40bc45154a9',
+  dai_usdc_001: '0xbf16ef186e715668aa29cef57e2fd7f9d48adfe6',
+  matic_eth_030: null,
+  link_eth_030: null,
+};
+export const ARBITRUM_POOLS: PoolInfoType<AddressType | null> = {
+  usdc_eth_005: '0xc31e54c7a869b9fcbecc14363cf510d1c41fa443',
+  dai_usdc_001: '0xf0428617433652c9dc6d1093a42adfbf30d29f74',
+  matic_eth_030: null,
+  link_eth_030: null,
+};

@@ -8,6 +8,7 @@ export const envs = {
     ethereum: _env.ETHEREUM_PROVIDER_URL || '',
     ethereum_2: _env.ETHEREUM_PROVIDER_URL_2 || '',
     polygon: _env.POLYGON_PROVIDER_URL || '',
+    polygon_2: _env.POLYGON_PROVIDER_URL_2 || '',
     optimism: _env.OPTIMISM_PROVIDER_URL || '',
     arbitrum: _env.ARBITRUM_PROVIDER_URL || '',
     bnb: _env.BNB_PROVIDER_URL || '',
