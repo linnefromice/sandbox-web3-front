@@ -1,0 +1,423 @@
+[
+  {
+    "inputs": [
+      {
+        "internalType": "contract ISpoolAccessControl",
+        "name": "accessControl_",
+        "type": "address"
+      },
+      {
+        "internalType": "contract IAssetGroupRegistry",
+        "name": "assetGroupRegistry_",
+        "type": "address"
+      },
+      {
+        "internalType": "contract IRiskManager",
+        "name": "riskManager_",
+        "type": "address"
+      },
+      {
+        "internalType": "contract IDepositManager",
+        "name": "depositManager_",
+        "type": "address"
+      },
+      {
+        "internalType": "contract IWithdrawalManager",
+        "name": "withdrawalManager_",
+        "type": "address"
+      },
+      {
+        "internalType": "contract IStrategyRegistry",
+        "name": "strategyRegistry_",
+        "type": "address"
+      },
+      {
+        "internalType": "contract IMasterWallet",
+        "name": "masterWallet_",
+        "type": "address"
+      },
+      {
+        "internalType": "contract IUsdPriceFeedManager",
+        "name": "priceFeedManager_",
+        "type": "address"
+      },
+      {
+        "internalType": "contract ISmartVaultManager",
+        "name": "smartVaultManager_",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "ghostStrategy_",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "constructor"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "length",
+        "type": "uint256"
+      }
+    ],
+    "name": "BadStrategieslength",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "ConfigurationAddressZero",
+    "type": "error"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "bytes32",
+        "name": "role",
+        "type": "bytes32"
+      },
+      {
+        "internalType": "address",
+        "name": "account",
+        "type": "address"
+      }
+    ],
+    "name": "MissingRole",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "NotSameAssetGroup",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "accessControl",
+    "outputs": [
+      {
+        "internalType": "contract ISpoolAccessControl",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "assetGroupRegistry",
+    "outputs": [
+      {
+        "internalType": "contract IAssetGroupRegistry",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "depositManager",
+    "outputs": [
+      {
+        "internalType": "contract IDepositManager",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "smartVault",
+        "type": "address"
+      }
+    ],
+    "name": "getSVTTotalSupply",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address[]",
+        "name": "strategies",
+        "type": "address[]"
+      },
+      {
+        "internalType": "address",
+        "name": "riskProvider",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "allocationProvider",
+        "type": "address"
+      }
+    ],
+    "name": "getSmartVaultAllocations",
+    "outputs": [
+      {
+        "internalType": "uint256[][]",
+        "name": "allocations",
+        "type": "uint256[][]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "smartVault",
+        "type": "address"
+      },
+      {
+        "internalType": "bool",
+        "name": "doFlush",
+        "type": "bool"
+      }
+    ],
+    "name": "getSmartVaultAssetBalances",
+    "outputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "balances",
+        "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "smartVault",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "nftIds",
+        "type": "uint256[]"
+      }
+    ],
+    "name": "getUserSVTBalance",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "smartVault",
+        "type": "address"
+      },
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256[]",
+        "name": "nftIds",
+        "type": "uint256[]"
+      }
+    ],
+    "name": "getUserSVTsfromNFTs",
+    "outputs": [
+      {
+        "internalType": "uint256[]",
+        "name": "nftSvts",
+        "type": "uint256[]"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "internalType": "address[]",
+        "name": "smartVaults",
+        "type": "address[]"
+      },
+      {
+        "internalType": "uint256[][]",
+        "name": "nftIds",
+        "type": "uint256[][]"
+      },
+      {
+        "internalType": "bool[]",
+        "name": "doFlush",
+        "type": "bool[]"
+      }
+    ],
+    "name": "getUserVaultAssetBalances",
+    "outputs": [
+      {
+        "internalType": "uint256[][]",
+        "name": "balances",
+        "type": "uint256[][]"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "user",
+        "type": "address"
+      },
+      {
+        "internalType": "address[]",
+        "name": "smartVaults",
+        "type": "address[]"
+      },
+      {
+        "internalType": "uint256[][]",
+        "name": "nftIds",
+        "type": "uint256[][]"
+      },
+      {
+        "internalType": "bool[]",
+        "name": "doFlush",
+        "type": "bool[]"
+      }
+    ],
+    "name": "getUserVaultStrategyAssetBalances",
+    "outputs": [
+      {
+        "internalType": "uint256[][][]",
+        "name": "balances",
+        "type": "uint256[][][]"
+      }
+    ],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "ghostStrategy",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "masterWallet",
+    "outputs": [
+      {
+        "internalType": "contract IMasterWallet",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "priceFeedManager",
+    "outputs": [
+      {
+        "internalType": "contract IUsdPriceFeedManager",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "riskManager",
+    "outputs": [
+      {
+        "internalType": "contract IRiskManager",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "smartVaultManager",
+    "outputs": [
+      {
+        "internalType": "contract ISmartVaultManager",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "strategyRegistry",
+    "outputs": [
+      {
+        "internalType": "contract IStrategyRegistry",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "withdrawalManager",
+    "outputs": [
+      {
+        "internalType": "contract IWithdrawalManager",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  }
+]
