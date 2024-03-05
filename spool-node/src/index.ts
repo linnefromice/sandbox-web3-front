@@ -1,7 +1,10 @@
-import {ethers} from 'ethers';
+import {BigNumber, ethers} from 'ethers';
 import {formatEther} from 'ethers/lib/utils';
-import {envs} from '../src/environments';
-import {SpoolLens__factory} from './types/typechain';
+import {envs} from './environments';
+import {
+  EACAggregatorProxy__factory,
+  SpoolLens__factory,
+} from './types/typechain';
 
 const {providerUrl} = envs;
 
@@ -10,46 +13,32 @@ const main = async () => {
     'https://eth.llamarpc.com' // providerUrl.ethereum
   );
 
-  // const token = ERC20__factory.connect(
-  //   '0x6b175474e89094c44da98b954eedeac495271d0f', // DAI
-  //   provider
-  // );
-  // console.log(await token.name());
-  // console.log(await token.symbol());
-
-  const contract = SpoolLens__factory.connect(
-    '0x8aa6174333F75421903b2B5c70DdF8DA5D84f74F', // SpoolLens
-    provider
-  );
+  const spoolLensAddr = '0x8aa6174333F75421903b2B5c70DdF8DA5D84f74F';
+  const contractSpoolLens = SpoolLens__factory.connect(spoolLensAddr, provider);
 
   const weth = '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2';
-  const totalSupply = await contract.getSVTTotalSupply(weth);
+  const vaultSrETH = '0x5d6ac99835b0dd42ed9ffc606170e59f75a88fde';
+
+  const totalSupply = await contractSpoolLens.getSVTTotalSupply(weth);
+  const balances =
+    await contractSpoolLens.callStatic.getSmartVaultAssetBalances(
+      vaultSrETH,
+      false
+    );
+
+  const ETHUSDPriceFeed = '0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419';
+  const contractAggregator = EACAggregatorProxy__factory.connect(
+    ETHUSDPriceFeed,
+    provider
+  );
+  const rawPrice = await contractAggregator.latestAnswer();
+  const decimals = await contractAggregator.decimals();
+  const price = rawPrice.div(BigNumber.from(10).pow(decimals));
+
   console.log(`totalSupply: ${formatEther(totalSupply)}`);
-
-  const totalSupplyByStatic = await contract.callStatic.getSVTTotalSupply(weth);
-  console.log(`totalSupply by staticcall: ${formatEther(totalSupplyByStatic)}`);
-
-  const balances = await contract.callStatic
-    .getSmartVaultAssetBalances(weth, false)
-    .catch(e => {
-      console.log(
-        `Fail to getSmartVaultAssetBalances with doFlush=false: ${weth}`
-      );
-      console.error(e);
-      return [];
-    });
-  console.log(balances.map(b => formatEther(b)));
-
-  const balances2 = await contract.callStatic
-    .getSmartVaultAssetBalances(weth, true)
-    .catch(e => {
-      console.log(
-        `Fail to getSmartVaultAssetBalances with doFlush=true: ${weth}`
-      );
-      console.error(e);
-      return [];
-    });
-  console.log(balances2.map(b => formatEther(b)));
+  console.log(`balances: ${balances.map(b => formatEther(b))}`);
+  console.log(`price: ${price}`);
+  // Val SVT = price * balances[0] / totalSupply
 };
 
 main()
